@@ -189,6 +189,7 @@
     <Content Include="fonts\PRmiXeptR36kaC0GEAetxjqR_3kx9_hJXbbyU8S6IN0.woff" />
     <Content Include="fonts\xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="images\album_overlay.png" />
     <Content Include="js\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

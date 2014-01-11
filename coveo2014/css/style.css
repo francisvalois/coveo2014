@@ -29,6 +29,20 @@ body {
     display: inline-block;
     vertical-align: top;
     margin: 10px;
+    margin-top: 25px;
+    
+}
+
+.albumsBox:hover:before {
+    content: "";  
+    display: block;
+    position: absolute;
+    height: 190px;
+    right: 0;
+    background-image: url("../images/album_overlay.png");
+    background-repeat: no-repeat;
+    transition: background .3s linear; 
+
 }
 
 .gendersRow {
@@ -40,6 +54,9 @@ body {
     padding: 0px;
     margin: 0px;
     vertical-align: top;
+    background: none;
+    border: 1px #C6CFD5 solid;
+    min-height: 195px;
 }
 
 .albumArt {
@@ -48,6 +65,10 @@ body {
     margin: 0px;
     display: inline-block;
     vertical-align: top;
+}
+
+.genderTitle {
+    margin-top: 3px;
 }
 
 #contentTitle {
