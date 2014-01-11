@@ -1,4 +1,4 @@
-@model dynamic
+@model IList<string>
 
 @{
     ViewBag.Title = "Coveo Blitz 2014 - Les Chiens";
@@ -6,3 +6,10 @@
 }
 
 <h2>Hello, world!</h2>
+
+@{
+    foreach (var genre in Model)
+    {
+        <h4>@genre</h4>
+    }
+}

@@ -5,6 +5,8 @@ namespace coveo2014.App_Start
 {
     using System;
     using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Routing;
 
     using coveo2014.Architecture;
 
@@ -12,6 +14,19 @@ namespace coveo2014.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+
+    public class NinjectControllerFactory : DefaultControllerFactory
+    {
+        private IKernel ninjectKernel;
+        public NinjectControllerFactory(IKernel kernel)
+        {
+            ninjectKernel = kernel;
+        }
+        protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
+        {
+            return (controllerType == null) ? null : (IController)ninjectKernel.Get(controllerType);
+        }
+    }
 
     public static class NinjectWebCommon 
     {
@@ -46,6 +61,9 @@ namespace coveo2014.App_Start
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
             
             RegisterServices(kernel);
+
+            ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory(kernel));
+
             return kernel;
         }
 
