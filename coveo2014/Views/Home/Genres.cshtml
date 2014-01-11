@@ -1,7 +1,7 @@
-@model coveo2014.Models.PageModel<coveo2014.Models.Genre>
+@model coveo2014.Models.PageModel<KeyValuePair<coveo2014.Domain.Artist, IList<coveo2014.Domain.Album>>>
 
 @{
-    ViewBag.Title = "Coveo Blitz 2014 - Les Chiens";
+    ViewBag.Title = "Coveo Blitz 2014 - Artists";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,7 +20,7 @@
         </div>
         <div id="rightContent" class="col-md-11">
             <div id="contentTitle"class="row">
-                <div class="col-md-12"><h1>Choisir un genre</h1></div>
+                <div class="col-md-12"><h1>Choisir un Artiste</h1></div>
             </div>
             <div id="contentSortChoice" class="row">
                 <ul class="nav nav-tabs">
@@ -29,20 +29,22 @@
                 </ul>
             </div>
             
-            @for (int i = 0; i < Model.Items.Count; i++)
+            
+
+            @foreach(var artist in Model.Items)
             {
-                <a href="/Home/Genres?genre=@Url.Encode(Model.Items[i].Name)"><div class="genderBox">
+                <a href="/Home/Artist?id=@artist.Key.Id"><div class="genderBox">
                     <div class="albumsBox">
-                        @foreach (var j in Model.Items[i].AlbumArtist)
+                        @foreach (var j in artist.Value.Take(4))
                         {
-                            <div class="albumArt" data-artist="@j.Value" data-album="@j.Key"></div>
+                            <div class="albumArt" data-artist="@artist.Key.Name" data-album="@j.Name"></div>
                         }
                     </div>
                     <div class="row">
-                        <div class="genderTitle col-md-12">@Model.Items[i].Name</div>
+                        <div class="genderTitle col-md-12">@artist.Key.Name</div>
                     </div>
                     <div class="row">
-                        <div class=" artistList col-md-12">@string.Join(", ", Model.Items[i].AlbumArtist.Values)</div>
+                        <div class=" artistList col-md-12">@string.Join(", ", artist.Value.Take(4).Select(x => x.Name))</div>
                     </div>
                 </div></a>
             }

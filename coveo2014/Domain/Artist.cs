@@ -2,10 +2,13 @@ namespace coveo2014.Domain
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
 
     public class Artist
     {
         public IList<string> AlbumsId { get; set; }
+        
+        public string Text { get; set; }
 
         public DateTime EndDate { get; set; }
 

@@ -59,9 +59,27 @@ body {
     min-height: 195px;
 }
 
+.albumBox {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: top;
+    background: none;
+    border: 1px #C6CFD5 solid;
+    min-height: 195px;
+}
+
 .albumArt {
     width: 95px;
     padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.singleAlbumArt {
+    width: 200px;
+    height: 200px;
     margin: 0px;
     display: inline-block;
     vertical-align: top;
@@ -100,4 +118,9 @@ body {
 .facet {
     color: #32393d;
     margin-left:10px; 
+}
+
+#bibliography {
+    width: 50%;
+    height:200px;
 }

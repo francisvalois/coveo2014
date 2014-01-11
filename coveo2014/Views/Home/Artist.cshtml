@@ -1,0 +1,66 @@
+@model coveo2014.Models.PageModel<KeyValuePair<coveo2014.Domain.Artist, IList<coveo2014.Domain.Album>>>
+
+@{
+    ViewBag.Title = "Coveo Blitz 2014 - " + @Model.Items.First().Key.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="content" class="container">
+    <div class="row">
+        <div id="leftBar" class="col-md-1">
+
+            @{
+                foreach (var facet in Model.AvailableFacets)
+                {
+                    Html.RenderPartial("ListFacet", facet);
+                }
+            }
+            
+        </div>
+        <div id="rightContent" class="col-md-11">
+            
+            @{
+                var artist = Model.Items.First();
+
+                <div id="contentTitle"class="row">
+                    <div class="col-md-12"><h1>@artist.Key.Name</h1></div>
+                </div>
+                <div id="contentSortChoice" class="row">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#">Albums</a></li>
+                        <li><a href="#">Songs</a></li>
+                        <li><a href="#">Biography</a></li>
+                        <li><a href="#">Related Artists</a></li>
+                    </ul>
+                </div>
+                
+                <div id="bibliography">
+                    @string.Join(string.Empty, artist.Key.Text.Take(900))...
+                </div>
+
+                foreach (var album in artist.Value)
+                 {
+                     <a href="/Home/Album?id=@album.Id">
+                        <div class="genderBox">
+                            <div class="albumBox">
+                                <div class="singleAlbumArt" data-artist="@artist.Key.Name" data-album="@album.Name"></div>
+                            </div>
+                            <div class="row">
+                                <div class="genderTitle col-md-12">@album.Name</div>
+                            </div>
+                            <div class="row">
+                                <div class="artistList col-md-12">@album.ReleaseDate.ToString("D")</div>
+                            </div>
+                             <div class="row">
+                                <div class="artistList col-md-12">@album.TrackNames.Count songs</div>
+                            </div>
+                        </div>
+                     </a>
+                 }
+            }
+            
+
+        </div>
+    </div>
+</div>

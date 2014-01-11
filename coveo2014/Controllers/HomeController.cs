@@ -5,6 +5,7 @@ namespace coveo2014.Controllers
     using System.Linq;
     using System.Web.Mvc;
 
+    using coveo2014.Domain;
     using coveo2014.Models;
     using coveo2014.Services;
 
@@ -77,5 +78,65 @@ namespace coveo2014.Controllers
 
             return this.View(model);
         }
+
+        public ActionResult Genres(string genre)
+        {
+            var model = new PageModel<KeyValuePair<Artist, IList<Album>>>();
+
+            model.AvailableFacets.Add(
+                new Facet { IsList = true, Name = "Pays", Values = new[] { "Canada", "USA", "UK" } });
+
+            model.AvailableFacets.Add(
+                new Facet
+                {
+                    IsList = false,
+                    Name = "Nombre de disque",
+                    Values =
+                        Enumerable.Range(0, 20).Select(x => x.ToString(CultureInfo.InvariantCulture)).ToList()
+                });
+
+            var artists =
+                    this.dataProvider.Artists.Where(x => x.Value.Genres.Select(y => y.Trim()).Contains(genre)).Select(x => x.Value).ToList();
+
+            foreach (var artist in artists)
+            {
+                
+                var albums = artist.AlbumsId.Where(this.dataProvider.Albums.ContainsKey).Select(x => this.dataProvider.Albums[x]).ToList();
+
+                var dic = new KeyValuePair<Artist, IList<Album>>(artist, albums);
+
+                model.Items.Add(dic);
+            }
+
+            return View(model);
+        }
+
+        public ActionResult Artist(string id)
+        {
+            var model = new PageModel<KeyValuePair<Artist, IList<Album>>>();
+
+            model.AvailableFacets.Add(
+               new Facet { IsList = true, Name = "Pays", Values = new[] { "Canada", "USA", "UK" } });
+
+            model.AvailableFacets.Add(
+                new Facet
+                {
+                    IsList = false,
+                    Name = "Nombre de disque",
+                    Values =
+                        Enumerable.Range(0, 20).Select(x => x.ToString(CultureInfo.InvariantCulture)).ToList()
+                });
+
+            var artist = this.dataProvider.Artists[id];
+
+            var albums = artist.AlbumsId.Where(this.dataProvider.Albums.ContainsKey).Select(x => this.dataProvider.Albums[x]).ToList();
+
+            var dic = new KeyValuePair<Artist, IList<Album>>(artist, albums);
+
+            model.Items.Add(dic);
+
+            return View(model);
+        }
+
     }
 }

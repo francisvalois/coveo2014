@@ -49,6 +49,7 @@ namespace coveo2014.Services
             var lol = new Domain.Album
             {
                 Name = album.Name.First(),
+                Id = album.Id,
                 ArtistsId = album.Artists.ToList(),
                 Genres = album.Genres.ToList(),
                 Text = album.Text,
@@ -74,7 +75,8 @@ namespace coveo2014.Services
                     Id = artist.Id,
                     Instruments = artist.Instruments_played.ToList(),
                     Labels = artist.Labels.ToList(),
-                    Pays = artist.Origin.FirstOrDefault()
+                    Pays = artist.Origin.FirstOrDefault(),
+                    Text = artist.Text ?? string.Empty
                 };
             }
             catch (Exception e)

@@ -6,6 +6,8 @@ namespace coveo2014.Domain
     public class Album
     {
         public IList<string> ArtistsId { get; set; }
+
+        public string Id { get; set; }
         
         public IList<string> Genres { get; set; }
         
