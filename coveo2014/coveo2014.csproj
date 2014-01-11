@@ -171,6 +171,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\bootstrap_old.css" />
+    <Content Include="css\slider.css" />
     <Content Include="css\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -187,6 +188,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="vendor\bootstrap-slider.js" />
     <Content Include="vendor\bootstrap.js" />
     <Content Include="vendor\bootstrap.min.js" />
     <Content Include="vendor\jquery-2.0.3.min.js" />
