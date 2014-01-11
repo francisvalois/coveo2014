@@ -8,7 +8,10 @@ namespace coveo2014.App_Start
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    using com.coveo.blitz.thrift;
+
     using coveo2014.Architecture;
+    using coveo2014.Services;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -47,6 +50,7 @@ namespace coveo2014.App_Start
         /// </summary>
         public static void Stop()
         {
+            bootstrapper.Kernel.Get<IIndex>().Stop();
             bootstrapper.ShutDown();
         }
         

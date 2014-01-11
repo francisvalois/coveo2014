@@ -4,13 +4,19 @@ namespace coveo2014.Services
 
     using coveo2014.Domain;
 
-    public class FakeDataProvider : IDataProvider
+    public class RealDataProvider : IDataProvider
     {
+        public RealDataProvider()
+        {
+            this.Albums = new Dictionary<string, Album>();
+            this.Artists = new Dictionary<string, Artist>();
+        }
+
+        public IDictionary<string, Album> Albums { get; private set; }
+
+        public IDictionary<string, Artist> Artists { get; private set; }
+
         public IList<string> Genres { get; private set; }
-
-        public IList<Artist> Artists { get; private set; }
-
-        public IList<Album> Albums { get; private set; }
 
         public void CrawlData()
         {

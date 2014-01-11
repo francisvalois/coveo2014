@@ -1,0 +1,21 @@
+@model coveo2014.Models.Facet
+
+<div class="facetList row">
+    <div class="facetTitle facet-is-list-@Model.IsList">@Model.Name</div>
+
+    @if (Model.IsList)
+    {
+        foreach (var choice in Model.Values)
+        {
+            <li class="facet">@choice</li>
+        }
+    }
+    else
+    {
+        var sliderMin = Model.Values.Select(int.Parse).Min();
+        var sliderMax = Model.Values.Select(int.Parse).Max();
+
+        <input type="text" id="facet-slider-@Model.Name" class="facet-slider col-md-10" value="" data-slider-min="@sliderMin" data-slider-max="@sliderMax" data-slider-step="1"  data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show" data-slider-value="@sliderMin"/>
+    }
+
+</div>

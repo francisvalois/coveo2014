@@ -1,5 +1,7 @@
 namespace coveo2014.Architecture
 {
+    using com.coveo.blitz.thrift;
+
     using coveo2014.Services;
 
     using Ninject.Modules;
@@ -8,7 +10,9 @@ namespace coveo2014.Architecture
     {
         public override void Load()
         {
-            this.Kernel.Bind<IDataProvider>().To<FakeDataProvider>().InSingletonScope();
+            this.Kernel.Bind<Indexer.Iface>().To<RealIndex>().InSingletonScope();
+            this.Kernel.Bind<IIndex>().To<Index>().InSingletonScope();
+            this.Kernel.Bind<IDataProvider>().To<RealDataProvider>().InSingletonScope();
         }
     }
 }

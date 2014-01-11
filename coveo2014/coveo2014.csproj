@@ -139,12 +139,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Facet.cs" />
+    <Compile Include="Models\PageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Crawler.cs" />
-    <Compile Include="Services\FakeDataProvider.cs" />
+    <Compile Include="Services\RealDataProvider.cs" />
     <Compile Include="Services\ICrawler.cs" />
     <Compile Include="Services\IDataProvider.cs" />
+    <Compile Include="Services\IIndex.cs" />
+    <Compile Include="Services\Index.cs" />
     <Compile Include="Services\IQueryService.cs" />
+    <Compile Include="Services\RealIndex.cs" />
     <Compile Include="Thrift\Album.cs" />
     <Compile Include="Thrift\Artist.cs" />
     <Compile Include="Thrift\DocumentType.cs" />
@@ -205,10 +210,10 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\ListFacet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

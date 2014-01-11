@@ -6,11 +6,11 @@ namespace coveo2014.Services
 
     public interface IDataProvider
     {
+        IDictionary<string, Album> Albums { get; }
+
+        IDictionary<string, Artist> Artists { get; }
+
         IList<string> Genres { get; }
-
-        IList<Artist> Artists { get; }
-
-        IList<Album> Albums { get; }
 
         void CrawlData();
     }
