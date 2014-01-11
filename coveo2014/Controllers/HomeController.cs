@@ -1,5 +1,6 @@
 namespace coveo2014.Controllers
 {
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
@@ -36,7 +37,7 @@ namespace coveo2014.Controllers
 
             //client.ping
 
-            var model = new PageModel<string>();
+            var model = new PageModel<Genre>();
 
             model.AvailableFacets.Add(
                 new Facet { IsList = true, Name = "Pays", Values = new[] { "Canada", "USA", "UK" } });
@@ -50,7 +51,29 @@ namespace coveo2014.Controllers
                         Enumerable.Range(0, 20).Select(x => x.ToString(CultureInfo.InvariantCulture)).ToList()
                 });
 
-            model.Items = this.dataProvider.Genres;
+            var genres = new List<Genre>();
+
+            foreach (var genre in this.dataProvider.Genres)
+            {
+
+                var albums =
+                    this.dataProvider.Albums.Where(x => x.Value.Genres.Select(y => y.Trim()).Contains(genre)).Take(16).Select(x => x.Value).ToList();
+
+                var map = new Dictionary<string, string>();
+
+                foreach (var album in albums.Where(x => x.ArtistsId.Count > 0).Take(4))
+                {
+                    map.Add(album.Name, this.dataProvider.Artists[album.ArtistsId.First()].Name);
+                }
+
+                genres.Add(new Genre
+                           {
+                               Name = genre,
+                               AlbumArtist = map
+                           });
+            }
+
+            model.Items = genres;
 
             return this.View(model);
         }

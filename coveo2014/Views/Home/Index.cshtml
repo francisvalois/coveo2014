@@ -1,4 +1,4 @@
-@model coveo2014.Models.PageModel<string>
+@model coveo2014.Models.PageModel<coveo2014.Models.Genre>
 
 @{
     ViewBag.Title = "Coveo Blitz 2014 - Les Chiens";
@@ -33,16 +33,16 @@
             {
                 <div class="genderBox">
                     <div class="albumsBox">
-                        @for (int j = 0; j < 4; j++)
+                        @foreach (var j in Model.Items[i].AlbumArtist)
                         {
-                            <div class="albumArt"><img class="albumArt" src="http://lorempixel.com/100/100/animals/@j"/></div>
+                            <div class="albumArt" data-artist="@j.Value" data-album="@j.Key"></div>
                         }
                     </div>
                     <div class="row">
-                        <div class="col-md-12">@Model.Items[i]</div>
+                        <div class="col-md-12">@Model.Items[i].Name</div>
                     </div>
                     <div class="row">
-                        <div class=" artistList col-md-12">Artist 1, Artist2, Artist3</div>
+                        <div class=" artistList col-md-12">@string.Join(", ", Model.Items[i].AlbumArtist.Values)</div>
                     </div>
                 </div>
             }
